@@ -1,0 +1,47 @@
+if (state is HostDelected) {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        backgroundColor: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(10),
+                                          ),
+                                        ),
+                                        title: Center(
+                                            child: Icon(
+                                          MdiIcons.deleteCircle,
+                                          size: 70,
+                                          color: Colors.red,
+                                        )),
+                                        content: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Flexible(
+                                              child: Text(
+                                                  "Host ${host.host} has been deleted successfully",
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 18,
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                        actions: [
+                                          TextButtonWidget(
+                                            color: Color(0xff0146A5),
+                                            text: "Ok",
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                              context
+                                                  .read<HostBloc>()
+                                                  .add(FetchHosts());
+                                            },
+                                          ),
+                                        ],
+                                      ));
+                            } else if (state is HostError) {
+                              showDialogAlert(context, state.message);
+                            }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "55475643751",
+    "project_id": "monetra-app-9a4f0",
+    "storage_bucket": "monetra-app-9a4f0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55475643751:android:45047ba51b029389ea7bc2",
+        "android_client_info": {
+          "package_name": "com.unri.monetra"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2a3_D9CqnnlJbb0d4JIYTdTHJMAC7V8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
