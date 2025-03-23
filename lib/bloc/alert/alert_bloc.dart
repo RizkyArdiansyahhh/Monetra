@@ -47,11 +47,9 @@ class AlertBloc extends Bloc<AlertEvent, AlertState> {
       if (response.data != null && response.data["result"] != null) {
         List<dynamic> hosts = response.data["result"];
 
-        // Filter host yang tidak diinginkan
         hosts.removeWhere(
             (host) => host["hostid"] == "10084" || host["hostid"] == "10656");
 
-        // Filter hanya ICMP Ping
         List<Map<String, dynamic>> fetchedAlerts = hosts.map((host) {
           var icmpItem = (host["items"] as List?)?.firstWhere(
             (item) => item["key_"] == "icmpping",
@@ -66,7 +64,6 @@ class AlertBloc extends Bloc<AlertEvent, AlertState> {
           };
         }).toList();
 
-        // Cek apakah ada perubahan data
         if (_lastFetchedAlerts.toString() != fetchedAlerts.toString()) {
           // Simpan ke Firestore jika ada perubahan
           for (var alert in fetchedAlerts) {
@@ -76,8 +73,8 @@ class AlertBloc extends Bloc<AlertEvent, AlertState> {
                 .set(alert, SetOptions(merge: true));
           }
 
-          _lastFetchedAlerts = fetchedAlerts; // Perbarui cache
-          emit(AlertLoaded(fetchedAlerts)); // Emit hanya jika ada perubahan
+          _lastFetchedAlerts = fetchedAlerts;
+          emit(AlertLoaded(fetchedAlerts));
         }
       }
     } catch (e) {
@@ -87,7 +84,7 @@ class AlertBloc extends Bloc<AlertEvent, AlertState> {
 
   @override
   Future<void> close() {
-    _timer?.cancel(); // Hentikan polling saat BLoC dihancurkan
+    _timer?.cancel();
     return super.close();
   }
 }
